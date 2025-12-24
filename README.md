@@ -8,7 +8,8 @@ Gesture & voice controlled smart lighting with face recognition and web dashboar
 - Control brightness by moving thumb and index finger apart/together
 - **Fully closed** = 0% brightness
 - **Fully open** = 100% brightness  
-- **Auto-calibrating** for smooth, adaptive control
+- **Consistent Range** (30-220px) for reliable control
+- **Motion Smoothing** for stable brightness values
 
 ### 👏 Triple Clap Detection
 - **Single Clap** → Normal Mode

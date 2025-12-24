@@ -185,6 +185,14 @@ class FaceRecognitionSystem:
             
         return False, None
 
+    def get_registered_faces(self):
+        """Get list of registered face names."""
+        return list(self.face_data.keys())
+    
+    def get_face_count(self):
+        """Get number of registered faces."""
+        return len(self.face_data)
+
     def detect_and_draw_faces(self, frame, authorized_only=False):
         """Draw faces with status."""
         faces = self._detect_faces(frame)

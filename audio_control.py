@@ -51,24 +51,33 @@ class AudioController:
     def process_claps(self):
         now = time.time()
         with self.lock:
-            # Remove old claps (> 1.5s ago)
-            self.claps = [t for t in self.claps if now - t < 1.5]
+            # Remove old claps (> 2.0s ago) - extended for triple clap
+            self.claps = [t for t in self.claps if now - t < 2.0]
             
-            # Check patterns
-            # Single clap pattern? Hard to distinguish from noise instantaneously.
-            # Usually we wait a bit to see if another clap comes.
-            # But the requirement is "Single clap = relaxing" and "Double clap = party".
-            # If we detect 1 clap and no more for (say) 0.5s, trigger single.
-            # If we detect 2 claps, trigger double immediately.
+            # Check patterns:
+            # Single clap = Normal mode
+            # Double clap = Relaxing mode
+            # Triple clap = Party mode
             
-            if len(self.claps) == 2:
+            if len(self.claps) >= 3:
+                # Triple clap detected - Party mode
                 self.light_controller.set_mode("Party")
-                self.claps = [] # Reset
-            elif len(self.claps) == 1:
-                # Check if it has been hanging there for 0.6s
-                if now - self.claps[0] > 0.6:
+                print("[AUDIO] Triple clap detected - Party Mode!")
+                self.claps = []  # Reset
+            elif len(self.claps) == 2:
+                # Wait a bit to see if a third clap comes
+                if now - self.claps[-1] > 0.5:
+                    # No third clap, it's a double clap - Relaxing mode
                     self.light_controller.set_mode("Relaxing")
-                    self.claps = []
+                    print("[AUDIO] Double clap detected - Relaxing Mode!")
+                    self.claps = []  # Reset
+            elif len(self.claps) == 1:
+                # Wait to see if more claps come
+                if now - self.claps[0] > 0.7:
+                    # No more claps, it's a single clap - Normal mode
+                    self.light_controller.set_mode("Normal")
+                    print("[AUDIO] Single clap detected - Normal Mode!")
+                    self.claps = []  # Reset
 
     def stop(self):
         self.running = False

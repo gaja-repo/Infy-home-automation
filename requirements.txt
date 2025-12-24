@@ -2,3 +2,6 @@ opencv-python
 mediapipe
 pyaudio
 numpy
+flask
+opencv-contrib-python
+numpy

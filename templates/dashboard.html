@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Automation Dashboard</title>
+    <link rel="stylesheet" href="/static/dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>🏠 Home Automation Control Center</h1>
+            <p class="subtitle">Gesture & Voice Controlled Smart Lighting</p>
+        </header>
+
+        <!-- Main Grid -->
+        <div class="dashboard-grid">
+            
+            <!-- System Status Card -->
+            <div class="card status-card">
+                <h2>⚡ System Status</h2>
+                <div class="status-item">
+                    <span class="label">Light Status:</span>
+                    <span id="light-status" class="value">OFF</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Brightness:</span>
+                    <span id="brightness-status" class="value">50%</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Current Mode:</span>
+                    <span id="mode-status" class="value badge">Normal</span>
+                </div>
+                <div class="status-item">
+                    <span class="label">Authorized Faces:</span>
+                    <span id="face-count" class="value">0 / 2</span>
+                </div>
+            </div>
+
+            <!-- Face Management Card -->
+            <div class="card face-card">
+                <h2>👤 Face Recognition</h2>
+                
+                <div class="registered-faces">
+                    <h3>Registered Faces</h3>
+                    <div id="faces-list" class="faces-list">
+                        <p class="empty-message">No faces registered yet</p>
+                    </div>
+                </div>
+
+                <div class="register-form">
+                    <h3>Register New Face</h3>
+                    <div class="form-group">
+                        <input type="text" id="face-name" placeholder="Enter name" maxlength="30">
+                        <button id="capture-btn" class="btn btn-primary">
+                            📸 Capture & Register
+                        </button>
+                    </div>
+                    <p class="help-text">Position yourself in front of the camera before capturing</p>
+                </div>
+            </div>
+
+            <!-- Camera Preview Card -->
+            <div class="card camera-card">
+                <h2>📷 Camera Feed</h2>
+                <div class="camera-preview">
+                    <img id="camera-feed" src="/video_feed" alt="Camera Feed">
+                </div>
+                <p class="help-text">Live feed showing face detection</p>
+            </div>
+
+            <!-- Manual Controls Card -->
+            <div class="card controls-card">
+                <h2>🎛️ Manual Controls</h2>
+                
+                <div class="control-group">
+                    <label>Light Power</label>
+                    <button id="toggle-light-btn" class="btn btn-toggle">
+                        💡 Toggle Light
+                    </button>
+                </div>
+
+                <div class="control-group">
+                    <label>Brightness Control</label>
+                    <input type="range" id="brightness-slider" min="0" max="100" value="50">
+                    <span id="brightness-value">50%</span>
+                </div>
+
+                <div class="control-group">
+                    <label>Test Modes</label>
+                    <div class="mode-buttons">
+                        <button class="btn btn-mode" data-mode="Normal">Normal</button>
+                        <button class="btn btn-mode" data-mode="Relaxing">Relaxing</button>
+                        <button class="btn btn-mode" data-mode="Party">Party</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instructions Card -->
+            <div class="card instructions-card">
+                <h2>📋 Gesture & Audio Controls</h2>
+                
+                <div class="instruction-section">
+                    <h3>🖐️ Hand Gestures</h3>
+                    <ul>
+                        <li><strong>1 Finger (Index):</strong> Turn lights ON</li>
+                        <li><strong>2 Fingers (Index + Middle):</strong> Turn lights OFF</li>
+                        <li><strong>Thumb + Index Distance:</strong> Control brightness
+                            <ul class="sub-list">
+                                <li>Fully closed = 0% brightness</li>
+                                <li>Fully open = 100% brightness</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="instruction-section">
+                    <h3>👏 Clap Patterns</h3>
+                    <ul>
+                        <li><strong>Single Clap:</strong> Normal Mode</li>
+                        <li><strong>Double Clap:</strong> Relaxing Mode</li>
+                        <li><strong>Triple Clap:</strong> Party Mode</li>
+                    </ul>
+                </div>
+
+                <div class="instruction-section">
+                    <h3>🔒 Security</h3>
+                    <p>Gestures and audio controls only work when an authorized face is detected by the camera.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Notifications -->
+        <div id="notification" class="notification"></div>
+    </div>
+
+    <script src="/static/dashboard.js"></script>
+</body>
+</html>

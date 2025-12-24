@@ -10,6 +10,8 @@ FRAME_HEIGHT = 480
 COLOR_TEXT = (255, 255, 255)
 COLOR_ON = (0, 255, 0)
 COLOR_OFF = (0, 0, 255)
+COLOR_AUTHORIZED = (0, 255, 0)
+COLOR_UNAUTHORIZED = (0, 0, 255)
 
 def draw_text(image, text, position, color=COLOR_TEXT, scale=0.7):
     cv2.putText(image, text, position, cv2.FONT_HERSHEY_SIMPLEX, scale, color, 2)

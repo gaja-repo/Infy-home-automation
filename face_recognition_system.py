@@ -62,9 +62,9 @@ class FaceRecognitionSystem:
         # minSize=(20, 20): Detect smaller faces (distance)
         faces = self.face_cascade.detectMultiScale(
             enhanced,
-            scaleFactor=1.05,
-            minNeighbors=3,
-            minSize=(20, 20),
+            scaleFactor=1.1,
+            minNeighbors=6,
+            minSize=(30, 30),
             maxSize=(500, 500)
         )
         return faces
